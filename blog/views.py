@@ -1,9 +1,17 @@
 from django.shortcuts import render
+from django.views.generic.list import ListView
+from django.views.generic import DetailView
+from blog.models import Blog
 
 
-def blog(request):
-    return render(request, 'blog/blog.html')
+class BlogListView(ListView):
+    model = Blog
+    context_object_name = 'blogs'
+    template_name = 'blog/blog.html'
 
 
-def blog_detail(request):
-    return render(request, 'blog/blog_detail.html')
+class BlogDetailView(DetailView):
+    model = Blog
+    context_object_name = 'blog'
+    template_name = 'blog/blog_detail.html'
+

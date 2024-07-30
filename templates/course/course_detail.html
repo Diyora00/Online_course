@@ -1,10 +1,112 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
 
-</body>
-</html>
+
+{% block course_detail %}
+    <!DOCTYPE html>
+<html lang="en">
+    <body>
+        <!-- Navigation-->
+        <!-- Product section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="row gx-4 gx-lg-5 align-items-center">
+                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ course.image.url }}" alt="..." /></div>
+                    <div class="col-md-6">
+                         {% if messages %}
+                                <ul class="messages">
+                                    {% for message in messages %}
+                                        <li style="color:green;font-size: larger" {% if message.tags %}
+                                            class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                    {% endfor %}
+                                </ul>
+                          {% endif %}      
+                        <h1 class="display-5 fw-bolder">{{ course.title }}</h1>
+                        <div class="fs-5 mb-5">
+                            <h3 class="display-5 fw-bolder">Price: ${{ course.price }}</h3>
+                            <h3 style="color: #0dd481">Teachers:</h3>
+                            {% for teacher in teachers %}
+                                <h4>{{ teacher.full_name }}</h4>
+                            {% endfor %}
+                        </div>
+                        <p class="lead">{{ course.description }}</p>
+{#                        <div class="d-flex">#}
+{#                            <form method="post">#}
+{#                                {% csrf_token %}#}
+{#                                <div class="form-group">#}
+{#                                    <h2>Place an order</h2>#}
+{#                                </div>#}
+{#                                <div class="form-group mb-3">#}
+{#                                  <label for="formGroupExampleInput">Your name<input name="name" class="form-control"  placeholder="Your name"></label>#}
+{#                                </div>#}
+{#                                <div class="form-group mb-3">#}
+{#                                  <label for="formGroupExampleInput2">Email<input name="email" class="form-control" placeholder="Your email" type="email"></label>#}
+{#                                </div>#}
+{#                                <div class="form-group mb-3">#}
+{#                                  <label for="formGroupExampleInput2">Quantity<input name="quantity" class="form-control" type="number" placeholder="Quantity"></label>#}
+{#                                </div>#}
+{#                                  <div class="form-group mb-3">#}
+{##}
+{#                                    <button class="btn btn-success" type="submit">Send</button>#}
+{#                                  </div>#}
+{#                              </form>#}
+{#                        </div>#}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container mt-4 mb-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="text-center">
+                        <h2>Latest comments({{ comments.count }})</h2>
+                    </div>
+                {% for comment in comments %}
+                    <div class="media card p-4 mt-2">
+                        <div class="media-body">
+                          <h3 class="mt-0">{{ comment.name }} </h3><h1 style="font-size: 15px">{{ comment.created_at }}</h1>
+                          {{ comment.body }}
+                        </div>
+                    </div>
+                {% endfor %}    
+                    
+
+                </div>
+
+                <div class="col-8 offset-2 mt-5">
+                   
+                    <div class=" p-5">
+                        <div class="text-center">
+                            <h3>Add Comment</h3>
+                        </div>
+
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <div class="form-group mb-3">
+                          <label for="formGroupExampleInput">Your name<input name="name" class="form-control"  placeholder="Your name"></label>
+
+                        </div>
+                        <div class="form-group mb-3">
+                          <label for="formGroupExampleInput2">Your email<input type="email" name="email" class="form-control" placeholder="Your email"></label>
+
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="formGroupExampleInput2">Your comment</label>
+                            <textarea name="body" class="form-control" id="" cols="30" rows="10"></textarea>
+                          </div>
+
+                          <div class="form-group mb-3">
+                           <button class="btn btn-success" type="submit">Send</button>
+
+                          </div>
+                    </form>
+
+                    </div>
+                      
+                </div>
+            </div>
+        </div>
+{% endblock %}
