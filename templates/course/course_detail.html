@@ -11,7 +11,10 @@
         <section class="py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="row gx-4 gx-lg-5 align-items-center">
-                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ course.image.url }}" alt="..." /></div>
+{#                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ course.image.url }}" alt="..." /></div>#}
+                    <div class="col-md-6">
+                        <video controls width="300px" height="400px"><source src="{{ course.video.url }}" type="video/mp4"></source></video>
+                    </div>
                     <div class="col-md-6">
                          {% if messages %}
                                 <ul class="messages">
@@ -24,6 +27,7 @@
                         <h1 class="display-5 fw-bolder">{{ course.title }}</h1>
                         <div class="fs-5 mb-5">
                             <h3 class="display-5 fw-bolder">Price: ${{ course.price }}</h3>
+                            <h3 class="display-5 fw-bolder"><i class="fa fa-star text-primary mr-2"></i>Rating: {{ course.rating }}</h3>
                             <h3 style="color: #0dd481">Teachers:</h3>
                             {% for teacher in teachers %}
                                 <h4>{{ teacher.full_name }}</h4>
@@ -65,12 +69,13 @@
                 {% for comment in comments %}
                     <div class="media card p-4 mt-2">
                         <div class="media-body">
-                          <h3 class="mt-0">{{ comment.name }} </h3><h1 style="font-size: 15px">{{ comment.created_at }}</h1>
+                          <h3 class="mt-0">{{ comment.name }} </h3><h1 style="font-size: 15px">{{ comment.created_at }}</h1><h1 style="font-size: 15px">Given rating: {{ comment.rating }}</h1>
+                            <br>
                           {{ comment.body }}
                         </div>
                     </div>
                 {% endfor %}    
-                    
+
 
                 </div>
 
@@ -81,9 +86,8 @@
                             <h3>Add Comment</h3>
                         </div>
 
-                    <form method="post">
+                    <form method="post" action="{% url 'comment' course.slug %}">
                         {% csrf_token %}
-
                         <div class="form-group mb-3">
                           <label for="formGroupExampleInput">Your name<input name="name" class="form-control"  placeholder="Your name"></label>
 
@@ -91,6 +95,11 @@
                         <div class="form-group mb-3">
                           <label for="formGroupExampleInput2">Your email<input type="email" name="email" class="form-control" placeholder="Your email"></label>
 
+                        </div>
+                        
+                        <div class="form-group mb-3">
+                             <label for="quantity">Rating:<input class="form-control" type="number" id="quantity" name="rating" min="1" max="5"></label>
+                            
                         </div>
 
                         <div class="form-group mb-3">

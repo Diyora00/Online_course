@@ -94,7 +94,7 @@
                 <form method="post" action="{% url 'login' %}">
                     {% csrf_token %}
                   <div class="mb-3">
-                      <label for=""><input class="form-control" type="email" name="email" placeholder="Email" /></label>
+                      <label for=""><input class="form-control" type="email" name="email" placeholder="Email address" /></label>
                   </div>
                   <div class="mb-3">
                       <label for=""><input class="form-control" type="password" name="password" placeholder="Password" /></label>
@@ -117,11 +117,8 @@
                   <div class="divider-content-center">or log in with</div>
                 </div>
                 <div class="row g-2 mt-2">
-                  <div class="col-sm-6"><a class="btn btn-outline-google-plus btn-sm d-block w-100"><span class="fab fa-google-plus-g me-2" data-fa-transform="grow-8"></span> google</a></div>
-                  <div class="col-sm-6"><a class="btn btn-outline-facebook btn-sm d-block w-100" ><span class="fab fa-facebook-square me-2" data-fa-transform="grow-8"></span> facebook</a></div>
-                    <a >
-                        Sign in with Twitter
-                    </a>
+                  <div class="col-sm-6"><a href="{% url "social:begin" "google-oauth2" %}" class="btn btn-outline-google-plus btn-sm d-block w-100"><span class="fab fa-google-plus-g me-2" data-fa-transform="grow-8"></span> google</a></div>
+                  <div class="col-sm-6"><a href="{% url "social:begin" "twitter" %}" class="btn btn-outline-twitter btn-sm d-block w-100" ><span class="fab fa-twitter-square me-2" data-fa-transform="grow-8"></span> twitter </a></div>
                 </div>
               </div>
             </div>

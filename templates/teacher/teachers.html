@@ -34,12 +34,12 @@
                     <div class="col-md-6 col-lg-3 text-center team mb-4">
                     <div class="team-item rounded overflow-hidden mb-2">
                         <div class="team-img position-relative">
-                            <img class="img-fluid" src="{{ teacher.image.url }}" style="width: 300px; height: 250px" alt="">
-                            <div class="team-social">
-                                <a class="btn btn-outline-light btn-square mx-1" href="#"><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-outline-light btn-square mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-outline-light btn-square mx-1" href="#"><i class="fab fa-linkedin-in"></i></a>
-                            </div>
+                            <a href="{% url 'teacher_detail' teacher.id %}"><img class="img-fluid" src="{{ teacher.image.url }}" style="width: 300px; height: 250px" alt=""></a>
+{#                            <div class="team-social">#}
+{#                                <a class="btn btn-outline-light btn-square mx-1" href="#"><i class="fab fa-twitter"></i></a>#}
+{#                                <a class="btn btn-outline-light btn-square mx-1" href="#"><i class="fab fa-facebook-f"></i></a>#}
+{#                                <a class="btn btn-outline-light btn-square mx-1" href="#"><i class="fab fa-linkedin-in"></i></a>#}
+{#                            </div>#}
                         </div>
                         <div class="bg-secondary p-4">
                             <a href="{% url 'teacher_detail' teacher.id %}"><h5>{{ teacher.full_name }}</h5></a>

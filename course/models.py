@@ -5,6 +5,8 @@ from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 from django.utils.text import slugify
 from teacher.models import Teacher
+from blog.models import Blog
+from django.db.models import Sum
 
 
 class AbstractClass(models.Model):
@@ -62,6 +64,16 @@ class Course(AbstractClass):
             minutes = self.duration % 60
             return minutes
 
+    @property
+    def rating(self):
+        r = self.comments.aggregate(total_ratings=Sum('rating'))['total_ratings'] or 0
+        c = self.comments.count()
+        if c > 0:
+            result = round(r / c, 2)
+        else:
+            result = 0
+        return result
+
     class Meta:
         ordering = ['-id']
 
@@ -76,9 +88,10 @@ class Comment(AbstractClass):
         five = 5
     name = models.CharField(max_length=100)
     email = models.EmailField()
-    comment = models.TextField()
-    rating = models.IntegerField(choices=RatingChoices.choices, default=RatingChoices.zero.value)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='comments')
+    body = models.TextField()
+    rating = models.IntegerField(choices=RatingChoices.choices, default=RatingChoices.zero.value, null=True, blank=True)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='comments', null=True)
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='comments', null=True)
 
     class Meta:
         ordering = ['-id']
@@ -89,7 +102,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(unique=True, null=True, blank=True, max_length=50)
     phone_number = models.CharField(unique=True, null=True, blank=True, max_length=15)
     date_of_birth = models.DateField(null=True, blank=True)
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=True)
     my_order = models.PositiveIntegerField(
@@ -124,6 +137,7 @@ class Student(models.Model):
     first_name = models.CharField(max_length=50, null=False, blank=False)
     last_name = models.CharField(max_length=50, null=False, blank=False)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='student')
+    course = models.ManyToManyField(Course, related_name='students', null=True)
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'

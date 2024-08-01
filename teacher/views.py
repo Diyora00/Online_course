@@ -14,4 +14,12 @@ class TeacherListView(ListView):
 class TeacherDetailView(DetailView):
     model = Teacher
     template_name = 'teacher/teacher_detail.html'
+    context_object_name = 'teacher'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        courses = self.object.courses.all()
+        context['courses'] = courses
+        return context
+
 
