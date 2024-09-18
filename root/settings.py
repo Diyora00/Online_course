@@ -27,10 +27,10 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = 'edjango-insecure-c$zd5w5u*4od%y7(3d+y1s9_1o^g4wc@1f-anxdb_=k9=^r(f1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')
+DEBUG = True
 
 ALLOWED_HOSTS = ['.vercel.app']
 
@@ -151,8 +151,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = 'bdiyora008@gmail.com'
+EMAIL_HOST_PASSWORD = 'scda fplx jwhj jvyr'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 AUTHENTICATION_BACKENDS = [
@@ -174,10 +174,10 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.user.user_details',
 )
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = env('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = env('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY='515640956511-nde6k1ts7q03rnb18pkth9gndt1v0ffb.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET='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'
 LOGIN_REDIRECT_URL = '/home'
 
-SOCIAL_AUTH_TWITTER_KEY = env('SOCIAL_AUTH_TWITTER_KEY')
-SOCIAL_AUTH_TWITTER_SECRET = env('SOCIAL_AUTH_TWITTER_SECRET')
+SOCIAL_AUTH_TWITTER_KEY='BqPIZ1tQtDBzc9EQ1p8cUrGNp'
+SOCIAL_AUTH_TWITTER_SECRET='QJHdxWWFPmdM8hS88hQQkOGnnUjyCm72CJtKFP1pGh1yPDJHeq'
 
