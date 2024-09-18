@@ -32,7 +32,7 @@ SECRET_KEY = 'edjango-insecure-c$zd5w5u*4od%y7(3d+y1s9_1o^g4wc@1f-anxdb_=k9=^r(f
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['online-course-2k1j.onrender.com']
+ALLOWED_HOSTS = ['online-course-2k1j.onrender.com', '127.0.0.1']
 
 
 # Application definition

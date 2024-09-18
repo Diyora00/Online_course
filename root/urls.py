@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from root import settings
 from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,3 +27,6 @@ urlpatterns = [
     path('', include('blog.urls')),
     path('social-auth/', include('social_django.urls', namespace='social')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# change made to urlpattern before deploying
+urlpatterns += staticfiles_urlpatterns()
