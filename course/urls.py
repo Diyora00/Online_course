@@ -5,7 +5,7 @@ from root import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('home/', index, name='home'),
+    path('', index, name='home'),
     path('courses/', CourseListView.as_view(), name='courses'),
     path('subject/<slug:subject_slug>/courses', CourseListView.as_view(), name='courses_of_subject'),
     path('course/<slug:slug>/', CourseDetailView.as_view(), name='course_detail'),
